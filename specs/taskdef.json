@@ -1,0 +1,18 @@
+{
+  "containerDefinitions": [
+    {
+      "portMappings": [
+        { "hostPort": 0, "protocol": "tcp", "containerPort": 80 }
+      ],
+      "cpu": 1,
+      "memory": 512,
+      "image": "<TASK_DEFINITION>",
+      "essential": true,
+      "name": "sampleAppContainer"
+    }
+  ],
+  "family": "FAMILY",
+  "taskDefinitionArn": "TASK_ARN",
+  "executionRoleArn": "TASK_EXEC_ARN",
+  "requiresCompatibilities": ["EC2"]
+}

@@ -1,0 +1,35 @@
+version: 0.2
+phases:
+   install:
+      runtime-versions:
+         docker: 18
+
+   pre_build:
+      commands:
+         # Install Test depends
+         - npm install
+         - node ./scripts/specs
+         - node ./scripts/task $TASK_ARN $TASK_EXEC_ARN $FAMILY
+         - node ./scripts/image $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/backend:latest
+
+   build:
+      commands:
+         # Login to DockerHub
+         - docker login --username $DOCKER_USERNAME --password $DOCKERHUB_PASS
+         # Login to aws ECR
+         - aws ecr get-login-password --region $AWS_DEFAULT_REGION | docker login --username AWS --password-stdin $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com
+
+   post_build:
+      commands:
+         - docker build -t backend -f ./Dockerfile .
+         # Tag images for ECR
+         - docker tag backend $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/backend:latest
+         # Push each image to aws ECR
+         - docker push $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/backend:latest
+         - ls
+
+artifacts:
+   files:
+      - ./appspec.yaml
+      - ./taskdef.json
+      - ./imageDetail.json
