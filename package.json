@@ -37,6 +37,8 @@
     "build": "tsc",
     "start": "node ./dist",
     "dev": "nodemon --watch src src/index.ts",
-    "test": "jest --config ./configs/jest.config.js"
+    "test": "jest --config ./configs/jest.config.js",
+    "build:docker": "docker build -t server -f ./Dockerfile .",
+    "start:docker": "docker run server"
   }
 }
