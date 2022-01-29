@@ -1,11 +1,16 @@
 # Simple Express Container
 
-#### Start
-
+#### Install
 ```
     npm install
 ```
 
+#### Build
+```
+    npm run build
+```
+
+#### Start
 ```
     npm run dev
 ```
