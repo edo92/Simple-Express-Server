@@ -1,5 +1,5 @@
 # Build
-FROM node:16.13.0 as builder
+FROM node:16.13.2 as builder
 
 COPY . ./
 RUN npm install
@@ -7,7 +7,7 @@ RUN npm run build
 
 
 # Production
-FROM node:16.13.0
+FROM node:16.13.2
 WORKDIR /app
 
 COPY package*.json ./

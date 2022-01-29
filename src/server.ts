@@ -29,7 +29,7 @@ export class Server implements IServer {
 
   private createServer(): void {
     this.app.listen(this.port, () => {
-      console.log(`Listening on port ${this.port}`);
+      console.log(`🚀 Listening on port ${this.port}`);
     });
   }
 }

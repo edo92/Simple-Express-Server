@@ -26,7 +26,6 @@ phases:
          - docker tag backend $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/backend:latest
          # Push each image to aws ECR
          - docker push $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/backend:latest
-         - ls
 
 artifacts:
    files:
